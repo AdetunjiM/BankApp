@@ -1,6 +1,7 @@
 
 from AccountClasses import Account, customer
 import random
+import csv
 
 fnameCustomer = "customerDB.csv"
 
@@ -17,17 +18,16 @@ def startmenu():
         login()
     elif selection == 2:
         newacct()
+        login()
     else:
         print("invalid option selected ")
         
     
 def login():
     print("Enter the login details of the customer \n")
-    AccNum = int(input("Enter your account number ----->>\n"))
+    AccNum = str(input("Enter your account number ----->>\n"))
     password= input("Enter your password----->> \n")
-    
-    
-    
+    checkcusutomer(AccNum,password,fnameCustomer)
     
 def newacct():
     print("Welcome New customer to CITIZENS bank\nNew Customer enter your details: \n")
@@ -45,7 +45,7 @@ def newacct():
     newcustomer= customer(FirstName,LastName,password)
     AccountDetails = Account(AccNum,type,0)
     print("Account has been created\n\n\n")
-    savenewcustomer(fnameCustomer)
+    savenewcustomer(FirstName,LastName,AccNum,type,password,fnameCustomer)
     print(f"Your Balance is {AccountDetails.balance} \nWould you like to make a deposit right now ? ")
     response = input("Y/N---->>")
     if  response in ("YES","Y","y","yes"):
@@ -55,7 +55,7 @@ def newacct():
         pass
     print(f"welcome New customer {newcustomer.firstname} {newcustomer.lastname} , Your Account number is {AccountDetails.AccNum} Balance is {AccountDetails.balance}")
     print(f"\n\n\n\n\n")
-    login()
+    
 
 
 def generateAccNumSavings():
@@ -72,10 +72,18 @@ def generateAccNumChecking():
         result=result+value
     return result
 
-def savenewcustomer(firstname,lastname,AccountNumber,accountType,password):
-    with open(fnameCustomer,"a") as f:
+def savenewcustomer(firstname,lastname,AccountNumber,accountType,password,fname):
+    with open(fname,"a") as f:
         f.write(f"{firstname},{lastname},{AccountNumber},{accountType},{password}\n")
         
 
-def checkcusutomer():
+def checkcusutomer(AccountNumber,Password,fname):
+    with open(fname,"r") as f:
+        data=csv.reader(f)
+        for row in data:
+            AccNo= row[2]
+            passw = row[4]
+            if (AccountNumber ==AccNo and Password == passw):
+                print("Login complete ")
     pass
+    

@@ -1,12 +1,11 @@
-from AccountClasses import customer
+from AccountClasses import *
 from AccountMethods import *
 
 fname="AccountDB.csv"
 
 def main():
-    savenewcustomer("Ade","Mofobi","hdh666","savings","hdhdh")
-    savenewcustomer("Ife","Wabom","77ddh","current","7hdhd")
     
+    checkcusutomer("CH597252","Tunji",fnameCustomer)
     
 
 

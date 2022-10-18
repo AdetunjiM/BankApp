@@ -9,9 +9,8 @@ class customer:
         return f"Name:" + self.firstname + " " + self.lastname 
 
     
-class Account(customer):
+class Account():
     def __init__(self,AccNum,AccType,balance) -> None:
-        super().__init__(firstname,lastname,password)
         self.AccNum = str(AccNum)
         self.AccType=str(AccType)
         self.balance=int(balance)
